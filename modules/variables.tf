@@ -53,5 +53,5 @@ variable "db_02_cidr" {
 variable "domain_name" {
   description = "ドメイン名"
   type = string
-  default = "test-mm-sprint.com"
+  default = "xxxxxxxx.com"
 }
