@@ -13,7 +13,7 @@
 ---
 
 ## 構成図
-![アーキテクチャ図](./img/c2-terraform.jpg)
+![アーキテクチャ図](img/ec2-terraform.jpg)
 
 
 ---
