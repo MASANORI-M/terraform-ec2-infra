@@ -1,3 +1,8 @@
+provider "aws" {
+  alias = "global"
+  region = "us-east-1"
+}
+
 # CloudFront + Distribution
 resource "aws_cloudfront_origin_access_control" "web_oac" {
   name = "${var.web_name_prefix}-oac"
@@ -8,6 +13,7 @@ resource "aws_cloudfront_origin_access_control" "web_oac" {
 }
 
 resource "aws_cloudfront_distribution" "web_dist" {
+  provider = aws.global
   enabled = true
   is_ipv6_enabled = true
   comment = "CloudFront distribution for static site web-mm-251004"

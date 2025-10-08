@@ -2,6 +2,12 @@ provider "aws" {
   region = var.aws_region
 }
 
+# CloudFront/ACM用
+provider "aws" {
+  alias  = "virginia"
+  region = "us-east-1"
+}
+
 locals {
   app_name = "base"
   elb_name = "elb"
@@ -22,6 +28,11 @@ module "vpc" {
 }
 
 module "network" {
+  providers = {
+    aws = aws
+    aws.virginia  = aws.virginia
+  }
+  
   source = "./network"
   domain_name = var.domain_name
   app_name_prefix = local.app_name_prefix

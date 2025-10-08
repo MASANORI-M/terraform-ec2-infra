@@ -1,3 +1,13 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 5.0"
+      configuration_aliases = [aws.virginia]
+    }
+  }
+}
+
 resource "aws_route53_zone" "route53_zone" {
   name = var.domain_name
 
@@ -8,6 +18,7 @@ resource "aws_route53_zone" "route53_zone" {
 
 # ACM証明書（メインドメイン：web）
 resource "aws_acm_certificate" "acm" {
+  provider = aws.virginia
   domain_name = var.domain_name
   validation_method = "DNS"
 
@@ -40,6 +51,7 @@ resource "aws_route53_record" "route53_record" {
 
 # ACM証明書の検証
 resource "aws_acm_certificate_validation" "acm_certificate_validatio" {
+  provider          = aws.virginia
   certificate_arn = aws_acm_certificate.acm.arn
   validation_record_fqdns = [for record in aws_route53_record.route53_record : record.fqdn]
 }

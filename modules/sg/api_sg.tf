@@ -7,7 +7,7 @@ resource "aws_security_group" "api_sg" {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_blocks = [var.elb_sg_id]
+    security_groups = [var.elb_sg_id]
   }
 
   egress {
